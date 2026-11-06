@@ -1,33 +1,20 @@
-function startExam(e) {
-    e.preventDefault();
-    
-    // Ambil nilai input
-    const namaInput = document.getElementById('input-nama').value.trim();
-    const outletInput = document.getElementById('input-outlet').value.trim();
-
-    if (!namaInput || !outletInput) {
-        alert("Mohon isi Nama Lengkap dan Outlet/Cabang terlebih dahulu!");
-        return;
-    }
-
-    userData.name = namaInput;
-    userData.outlet = outletInput;
-
-    document.getElementById('display-nama').innerText = userData.name;
-    document.getElementById('display-outlet').innerText = "Outlet: " + userData.outlet;
-
-    // Sembunyikan login, tampilkan halaman ujian
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('exam-screen').classList.remove('hidden');
-
-    renderQuestions();
-
-    // Fullscreen aman (tidak bikin error jika diblokir browser)
-    try {
-        if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen().catch(err => console.log(err));
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST TEST ADMINISTRASI - PT Tuku Emas Indonesia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
         }
-    } catch(err) {
-        console.log("Fullscreen skipped");
-    }
-}
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800">
+
+    <!-- Wrapper Utama -->
+    <div id="app" class="max-w-3xl mx-auto p-4 sm:p-6">
+
+        <!-- HEADER / KOP
