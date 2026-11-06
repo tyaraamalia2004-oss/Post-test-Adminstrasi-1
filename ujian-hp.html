@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Test Administrasi - PT Tuku Emas Indonesia</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        /* Bagian Header & Logo */
+        .header-logo { text-align: center; margin-bottom: 20px; }
+        .header-logo img { max-width: 120px; height: auto; margin-bottom: 10px; }
+        h1 { color: #1e3a8a; text-align: center; font-size: 22px; margin: 0 0 5px 0; }
+        p.sub { text-align: center; color: #666; font-size: 14px; margin: 0 0 25px 0; font-weight: bold; }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13px; text-transform: uppercase; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px; }
+        button { background-color: #1e3a8a; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 15px; }
+        button:hover { background-color: #172554; }
+        .question-box { background: #fafafa; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .question-title { font-weight: bold; margin-bottom: 12px; font-size: 15px; }
+        .option-label { display: block; margin-bottom: 8px; cursor: pointer; font-size: 14px; }
+        .alert { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 12px; border-radius: 5px; font-size: 13px; margin-bottom: 15px; }
+        .hidden { display: none; }
+        .result-card { background: #eff6ff; border: 1px solid #bfdbfe; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; }
+        .score-num { font-size: 36px; font-weight: bold; color: #1e3a8a; margin: 10px 0; }
+        @media print { .no-print { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="login-screen">
+        <!-- Logo Tuku Emas Indonesia di Sini -->
+        <div class="header-logo">
+            <img src="https://tukuemas.id/storage/26/TE-4.png" alt="Logo Tuku Emas Indonesia">
+            <h1>PT TUKU EMAS INDONESIA</h1>
+            <p class="sub">POST TEST ADMINISTRASI</p>
+        </div>
+        
+        <div class="alert">
+            <strong>🔒 PERHATIAN:</strong> Kerjakan dengan teliti. Jangan keluar dari halaman atau berpindah aplikasi selama ujian berlangsung!
+        </div>
+
+        <form id="form-login" onsubmit="startExam(event)">
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="input-nama" required placeholder="Masukkan nama lengkap Anda">
+            </div>
+            <div class="form-group">
+                <label>Outlet / Cabang</label>
+                <input type="text" id="input-outlet" required placeholder="Contoh: Cikarang, Salatiga, dll">
+            </div>
+            <button type="submit">Mulai Ujian</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="exam-screen">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1e3a8a; padding-bottom: 10px; margin-bottom: 20px;">
+            <div>
+                <strong id="display-nama" style="color: #1e3a8a;"></strong><br>
+                <span id="display-outlet" style="font-size: 12px; color: #666;"></span>
+            </div>
+            <div id="violation-badge" style="background: #22c55e; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">
+                Pelanggaran: <span id="v-count">0</span>/3
+            </div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Soal akan dimuat otomatis lewat Javascript di sini -->
+        </div>
+
+        <button onclick="submitExam()">KIRIM JAWABAN UJIAN</button>
+    </div>
+
+    <div class="container hidden" id="result-screen">
+        <div class="header-logo">
+            <img src="https://tukuemas.id/storage/26/TE-4.png" alt="Logo Tuku Emas Indonesia">
+            <h1>LAPORAN HASIL POST-TEST</h1>
